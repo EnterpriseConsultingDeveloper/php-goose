@@ -49,6 +49,13 @@ class Crawler {
             $rawHTML = $response->getBody()->getContents();
         }
 
+        // css-selector bug workaround {
+        $pos = strpos($rawHTML, 'xml:lang');
+        if ($pos !== false) {
+            $rawHTML = substr_replace($rawHTML, 'lang', $pos, strlen('xml:lang'));
+        }
+        // }
+        
         // Generate document
         $doc = $this->getDocument($rawHTML);
 

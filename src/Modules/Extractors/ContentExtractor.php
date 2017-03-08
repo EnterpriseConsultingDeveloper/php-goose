@@ -185,13 +185,19 @@ class ContentExtractor extends AbstractModule implements ModuleInterface {
             return $node instanceof Element;
         });
 
+        // voglio sapere se trovo qualcosa
+        $trovato = false;
+        
         foreach ($siblings as $sibling) {
             if ($sibling->is('p, strong')) {
                 if ($stepsAway >= $maxStepsAwayFromNode) {
                     return false;
                 }
 
-                $wordStats = $this->config()->getStopWords()->getStopwordCount($sibling->text());
+                $text = trim($sibling->text());
+                if (!$trovato)
+                    $trovato = !empty($text);
+                $wordStats = $this->config()->getStopWords()->getStopwordCount($text);
 
                 if ($wordStats->getStopWordCount() > $minimumStopWordCount) {
                     return true;
@@ -201,6 +207,6 @@ class ContentExtractor extends AbstractModule implements ModuleInterface {
             }
         }
 
-        return false;
+        return !$trovato;
     }
 }

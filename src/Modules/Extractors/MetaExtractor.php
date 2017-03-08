@@ -189,9 +189,7 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
      */
     private function getMetaLanguage() {
         $lang = '';
-
         $el = $this->article()->getDoc()->find('html[lang]');
-
         if ($el->count()) {
             $lang = $el->first()->attr('lang');
         }
@@ -199,6 +197,7 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
         if (empty($lang)) {
             $selectors = [
                 'html > head > meta[http-equiv=content-language]',
+                'html > head > meta[http-equiv=Content-Language]',
                 'html > head > meta[name=lang]',
             ];
 

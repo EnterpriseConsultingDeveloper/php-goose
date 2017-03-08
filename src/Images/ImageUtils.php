@@ -45,7 +45,7 @@ class ImageUtils {
 
         $locallyStoredImages = [];
 
-        foreach ($localImages as $localImage) if (!empty($localImage)) {
+        foreach ($localImages as $localImage) if (!empty($localImage->file)) {
             $imageDetails = self::getImageDimensions($localImage->file);
 
             $locallyStoredImages[] = new LocallyStoredImage([
