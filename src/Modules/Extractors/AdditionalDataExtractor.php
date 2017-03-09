@@ -96,6 +96,16 @@ class AdditionalDataExtractor extends AbstractModule implements ModuleInterface 
     }
 
     /**
+     * Check if it is a valid url
+     * @param string $url
+     * @return boolean true if it is an url
+     */
+    private function isHttp($url) {
+        $re = '/^https?:\/\//s';
+        return filter_var($url, FILTER_VALIDATE_URL) && preg_match($re, $url)>0;
+    }
+    
+    /**
      * Pulls out links we like
      *
      * @return string[]
@@ -106,7 +116,8 @@ class AdditionalDataExtractor extends AbstractModule implements ModuleInterface 
         $candidates = $this->article()->getTopNode()->parent()->find('a[href]');
 
         foreach ($candidates as $el) {
-            if ($el->attr('href') != '#' && trim($el->attr('href')) != '') {
+            $href = trim($el->attr('href'));
+            if ($href != '#' && $href != '' && $this->isHttp($href) ) {
                 $goodLinks[] = [
                     'url' => $el->attr('href'),
                     'text' => Helper::textNormalise($el->text()),
