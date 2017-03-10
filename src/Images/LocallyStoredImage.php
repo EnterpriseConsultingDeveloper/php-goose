@@ -22,6 +22,9 @@ class LocallyStoredImage {
         }
     }
 
+    /**
+     * Remove tmp files when not needed anymore
+     */
     public function __destruct() {
         unlink($this->getLocalFileName());
     }
