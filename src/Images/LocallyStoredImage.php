@@ -22,6 +22,10 @@ class LocallyStoredImage {
         }
     }
 
+    public function __destruct() {
+        unlink($this->getLocalFileName());
+    }
+    
     /** @var string */
     private $imgSrc = '';
 
