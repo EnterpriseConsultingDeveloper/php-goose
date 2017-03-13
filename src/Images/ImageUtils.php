@@ -45,17 +45,21 @@ class ImageUtils {
 
         $locallyStoredImages = [];
 
-        foreach ($localImages as $localImage) if (!empty($localImage->file)) {
-            $imageDetails = self::getImageDimensions($localImage->file);
+        foreach ($localImages as $localImage) {
+            if (substr(mime_content_type($localImage->file),0,6)=='image/') {
+                $imageDetails = self::getImageDimensions($localImage->file);
 
-            $locallyStoredImages[] = new LocallyStoredImage([
-                'imgSrc' => $localImage->url,
-                'localFileName' => $localImage->file,
-                'bytes' => filesize($localImage->file),
-                'height' => $imageDetails->height,
-                'width' => $imageDetails->width,
-                'fileExtension' => self::getFileExtensionName($imageDetails),
-            ]);
+                $locallyStoredImages[] = new LocallyStoredImage([
+                    'imgSrc' => $localImage->url,
+                    'localFileName' => $localImage->file,
+                    'bytes' => filesize($localImage->file),
+                    'height' => $imageDetails->height,
+                    'width' => $imageDetails->width,
+                    'fileExtension' => self::getFileExtensionName($imageDetails),
+                ]);
+            } else {
+                unlink($localImage->file);
+            }
         }
 
         return $locallyStoredImages;
