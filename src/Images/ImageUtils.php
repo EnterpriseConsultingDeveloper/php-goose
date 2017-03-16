@@ -124,6 +124,8 @@ class ImageUtils {
             },
             'rejected' => function($reason, $index) use (&$results, $returnAll) {
                 if ($returnAll) {
+                    if (file_exists($results[$index]->file))
+                        \unlink($results[$index]->file);
                     $results[$index]->file = null;
                 } else {
                     unset($results[$index]);
