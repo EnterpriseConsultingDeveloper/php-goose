@@ -36,7 +36,7 @@ class ImageUtils {
      *
      * @return LocallyStoredImage[]
      */
-    public static function toreImagesToLocalFile($imageSrcs, $returnAll, Configuration $config) {
+    public static function storeImagesToLocalFile($imageSrcs, $returnAll, Configuration $config) {
         $localImages = self::handleEntity($imageSrcs, $returnAll, $config);
 
         if (empty($localImages)) {
