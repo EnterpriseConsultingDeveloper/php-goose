@@ -88,15 +88,17 @@ class ContentExtractor extends AbstractModule implements ModuleInterface {
         $topNodeScore = 0;
 
         foreach ($nodes as $node) {
-            $score = $this->getScore($node);
+            if (!empty($node)) {
+                $score = $this->getScore($node);
 
-            if ($score > $topNodeScore) {
-                $topNode = $node;
-                $topNodeScore = $score;
-            }
+                if ($score > $topNodeScore) {
+                    $topNode = $node;
+                    $topNodeScore = $score;
+                }
 
-            if ($topNode === false) {
-                $topNode = $node;
+                if ($topNode === false) {
+                    $topNode = $node;
+                }
             }
         }
 
