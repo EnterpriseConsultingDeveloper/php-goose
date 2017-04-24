@@ -117,7 +117,10 @@ class AdditionalDataExtractor extends AbstractModule implements ModuleInterface 
     private function getLinks() {
         $goodLinks = [];
 
-        $candidates = $this->article()->getTopNode()->parent()->find('a[href]');
+        $parent = $this->article()->getTopNode()->parent()->find('a[href]');
+        if (empty($parent))
+            return $goodLinks;
+        $candidates = $parent->find('a[href]');
 
         foreach ($candidates as $el) {
             $href = trim($el->attr('href'));
