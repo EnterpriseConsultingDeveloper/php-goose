@@ -71,7 +71,11 @@ class AdditionalDataExtractor extends AbstractModule implements ModuleInterface 
     private function getVideos() {
         $videos = [];
 
-        $nodes = $this->article()->getTopNode()->parent()->find('embed, object, iframe');
+        $parent = $this->article()->getTopNode()->parent();
+        if (empty($parent))
+            return $videos;
+        
+        $nodes = $parent->find('embed, object, iframe');
 
         foreach ($nodes as $node) {
             if ($node->hasAttribute('src')) {

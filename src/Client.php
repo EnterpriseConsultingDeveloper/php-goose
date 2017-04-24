@@ -39,7 +39,7 @@ class Client {
      */
     public function extractContent($url, $rawHTML = null) {
         $crawler = new Crawler($this->config);
-        $article = $crawler->crawl($url, $rawHTML);
+        $article = $crawler->crawl(trim($url), $rawHTML);
 
         return $article;
     }

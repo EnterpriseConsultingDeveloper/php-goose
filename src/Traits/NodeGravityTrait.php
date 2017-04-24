@@ -18,7 +18,7 @@ trait NodeGravityTrait {
      *
      * @return int
      */
-    private function getScore(Element $node) {
+    private function getScore(Element $node = null) {
         return empty($node) ? 0 : (int)$node->attr('gravityScore');
     }
 
@@ -29,7 +29,7 @@ trait NodeGravityTrait {
      * @param Element $node
      * @param int $addToScore
      */
-    private function updateScore(Element $node, $addToScore) {
+    private function updateScore(Element $node = null, $addToScore) {
         if (empty($node)) return;
 
         $currentScore = (int)$node->attr('gravityScore');
@@ -42,7 +42,7 @@ trait NodeGravityTrait {
      * @param Element $node
      * @param int $addToCount
      */
-    private function updateNodeCount(Element $node, $addToCount) {
+    private function updateNodeCount(Element $node = null, $addToCount) {
         if (empty($node)) return;
 
         $currentScore = (int)$node->attr('gravityNodes');
