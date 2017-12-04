@@ -17,6 +17,7 @@
         "ext-libxml": "*",
         "lib-libxml": ">=2.7.7",
         "jakeasmith/http_build_url": "0.1.*",
+        "guzzlehttp/guzzle": "4.*",
         "scotteh/php-dom-wrapper": "~0.7"
     },
     "require-dev": {
